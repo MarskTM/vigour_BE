@@ -76,7 +76,7 @@ func getStringEnvParameter(envParam string, defaultValue string) string {
 
 func goDotEnvVariable(key string) string {
 	// Load file .env
-	err := godotenv.Load(".env")
+	err := godotenv.Load(".env.dev")
 	// err := godotenv.Load(".env")
 
 	if err != nil {

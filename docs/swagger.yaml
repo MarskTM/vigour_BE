@@ -72,7 +72,7 @@ definitions:
       username:
         type: string
     type: object
-host: localhost:19000
+host: yourvigour.herokuapp.com
 info:
   contact: {}
   description: API lists for vigour API
