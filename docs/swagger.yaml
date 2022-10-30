@@ -1,0 +1,414 @@
+basePath: /api/v1
+definitions:
+  model.LoginResponse:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      refreshToken:
+        type: string
+      role:
+        type: string
+      success:
+        type: boolean
+      token:
+        type: string
+      userId:
+        type: integer
+      username:
+        type: string
+    type: object
+  model.Profile:
+    properties:
+      avatar:
+        type: string
+      birthday:
+        type: string
+      email:
+        type: string
+      gender:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      newUser:
+        type: string
+      phone:
+        type: string
+      real_name:
+        type: string
+      userId:
+        type: integer
+    type: object
+  model.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
+  model.User:
+    properties:
+      deleted_at:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      profile:
+        $ref: '#/definitions/model.Profile'
+      role:
+        type: string
+      username:
+        type: string
+    type: object
+  model.UserPayload:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:19000
+info:
+  contact: {}
+  description: API lists for vigour API
+  title: Swagger UI for vigour API
+  version: "1.0"
+paths:
+  /profile/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 'input: profile''s id => output: struct profile'
+      parameters:
+      - description: profile's id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get profile by id
+      tags:
+      - profile-manager-apis
+  /profile/all:
+    get:
+      consumes:
+      - application/json
+      description: 'output: struct profiles'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get profiles
+      tags:
+      - profile-manager-apis
+  /profile/create:
+    post:
+      consumes:
+      - application/json
+      description: 'input: profile model.profile => output: status'
+      parameters:
+      - description: fill profile
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/model.Profile'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Create profiles
+      tags:
+      - profile-manager-apis
+  /profile/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: 'input: profile''s id => output: status'
+      parameters:
+      - description: profile's id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete profile by id
+      tags:
+      - profile-manager-apis
+  /profile/update:
+    put:
+      consumes:
+      - application/json
+      description: 'input: profile model.profile => output: status'
+      parameters:
+      - description: change profile
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/model.Profile'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Update profiles
+      tags:
+      - profile-manager-apis
+  /profile/upsert:
+    put:
+      consumes:
+      - application/json
+      description: 'Upsert profile: if not exist => create'
+      parameters:
+      - description: info profile
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/model.Profile'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      summary: Upsert profiles
+      tags:
+      - profile-manager-apis
+  /profile/user/{user_id}:
+    get:
+      consumes:
+      - application/json
+      description: 'input: user_id => output: struct profile'
+      parameters:
+      - description: true id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get profile by userId
+      tags:
+      - profile-manager-apis
+  /user/{uid}:
+    get:
+      consumes:
+      - application/json
+      description: get user by id
+      parameters:
+      - description: User ID
+        in: path
+        name: uid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: get user by id
+      tags:
+      - user-manager-apis
+  /user/all:
+    get:
+      consumes:
+      - application/json
+      description: get all users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: get all users
+      tags:
+      - user-manager-apis
+  /user/create:
+    post:
+      consumes:
+      - application/json
+      description: creates new user
+      parameters:
+      - description: User information
+        in: body
+        name: UserInfo
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      summary: creates new user
+      tags:
+      - user-manager-apis
+  /user/delete/{uid}:
+    delete:
+      consumes:
+      - application/json
+      description: delete user
+      parameters:
+      - description: User ID
+        in: path
+        name: uid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: delete user
+      tags:
+      - user-manager-apis
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      description: log user in
+      parameters:
+      - description: username & password
+        in: body
+        name: LoginPayload
+        required: true
+        schema:
+          $ref: '#/definitions/model.UserPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: log user in
+      tags:
+      - user-manager-apis
+  /user/login/jwt:
+    post:
+      consumes:
+      - application/json
+      description: login user, return new token string jwt
+      parameters:
+      - description: Insert your refresh token
+        in: query
+        name: refToken
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.LoginResponse'
+      summary: login user
+      tags:
+      - user-manager-apis
+  /user/update:
+    put:
+      consumes:
+      - application/json
+      description: Update UserPassword by userId
+      parameters:
+      - description: User information
+        in: body
+        name: UserInfo
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      summary: Update new user password
+      tags:
+      - user-manager-apis
+  /user/wname:
+    get:
+      consumes:
+      - application/json
+      description: input username => user
+      parameters:
+      - description: username
+        in: query
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: get user with usn
+      tags:
+      - user-manager-apis
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

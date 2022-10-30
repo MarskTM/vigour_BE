@@ -1,10 +1,10 @@
 package main
 
-// @title Swagger UI for E-Rescues
+// @title Swagger UI for vigour API
 // @version 1.0
-// @description API lists for E-Rescues
+// @description API lists for vigour API
 
-// @host localhost:1900
+// @host localhost:19000
 // @BasePath /api/v1
 
 // @securityDefinitions.apikey ApiKeyAuth

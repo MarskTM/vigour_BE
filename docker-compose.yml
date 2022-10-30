@@ -1,0 +1,33 @@
+version: "3.3"
+
+services:
+  database:
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: vigour
+      POSTGRES_USER: vigources
+      POSTGRES_PASSWORD: 20010784
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    restart: always
+  
+  build:
+    image: vigour-builder
+    build:
+      context: . # Use an image built from the specified dockerfile in the current directory.
+      dockerfile: Dockerfile
+      args:
+        - HEADER_FILE=header.go
+        - ENV_FILE=.env
+    depends_on:
+      - database
+    volumes:
+      - ./vigour:/work/vigour
+    ports:
+      - "19001:19001"
+    restart: always
+  
+volumes:
+  data:

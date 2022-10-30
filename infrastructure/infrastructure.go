@@ -92,7 +92,7 @@ func loadEnvParameters() {
 	// appPort = getStringEnvParameter(APPPORT, goDotEnvVariable(("APPPORT")))
 	appPort = os.Getenv("PORT")
 	if appPort == "" {
-		appPort = "19000"
+		appPort = "19001"
 	}
 
 	dbHost = getStringEnvParameter(DBHOST, goDotEnvVariable(("DBHOST")))

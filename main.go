@@ -11,7 +11,7 @@ import (
 // @version 1.0
 // @description API lists for vigour API
 
-// @host localhost:19000
+// @host localhost:1900
 // @BasePath /api/v1
 
 // @securityDefinitions.apikey ApiKeyAuth

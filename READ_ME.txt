@@ -12,7 +12,7 @@ Run file server.
     - 1: migrate database
     - 0: run with default database
 
-Build Docker package:
+Run Docker package:
     
     docker build -t emotional_rescues .
     heroku container:push web -a recues  
