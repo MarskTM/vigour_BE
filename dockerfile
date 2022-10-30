@@ -8,7 +8,7 @@ LABEL Maintainer="Marsk <manhtokim@gmail.com>"
 ARG HEADER_FILE
 ARG ENV_FILE
 ENV HEADER_FILE=header.go
-ENV ENV_FILE=.env
+ENV ENV_FILE=.env.dev
 
 # Check HEADER_FILE & ENV_FILE
 RUN echo "File swagger: $HEADER_FILE"
